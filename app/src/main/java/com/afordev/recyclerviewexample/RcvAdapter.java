@@ -50,7 +50,7 @@ public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
                 @Override
                 public boolean onLongClick(View view) {
                     Toast.makeText(activity, "remove " + dataList.get(getAdapterPosition()).getName(), Toast.LENGTH_SHORT).show();
-                    removeItemView(getAdapterPosition());
+                    removeItem(getAdapterPosition());
                     return false;
                 }
             });
@@ -65,11 +65,10 @@ public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        DataForm data = dataList.get(position);
+        DataForm tmpData = dataList.get(position);
 
-        holder.tvName.setText(data.getName());
-
-        switch(data.getImageNumber()){
+        holder.tvName.setText(tmpData.getName());
+        switch(tmpData.getImageNumber()){
             case 1:
                 holder.ivIcon.setImageResource(R.drawable.ic_number_1);
                 break;
@@ -85,7 +84,7 @@ public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
         }
     }
 
-    private void removeItemView(int position) {
+    private void removeItem(int position) {
         dataList.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, dataList.size()); // 지워진 만큼 다시 채워넣기.
